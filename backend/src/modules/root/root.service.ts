@@ -46,6 +46,19 @@ export class RootService {
         try {
             const userAgent = req.headers['user-agent'];
 
+			const allowedAgents = ['v2raytun', 'Happ'];
+
+			const ua = userAgent ?? '';
+
+			const isAllowedAgent = allowedAgents.some(agent =>
+				ua.includes(agent)
+			);
+
+			if (!isAllowedAgent) {
+				res.status(404).send();
+				return;
+			}
+
             let shortUuidLocal = shortUuid;
 
             if (this.isGenericPath(req.path)) {
