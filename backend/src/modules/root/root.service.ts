@@ -48,17 +48,6 @@ export class RootService {
 
 			const allowedAgents = ['v2raytun', 'Happ'];
 
-			const ua = userAgent ?? '';
-
-			const isAllowedAgent = allowedAgents.some(agent =>
-				ua.includes(agent)
-			);
-
-			if (!isAllowedAgent) {
-				res.status(404).send();
-				return;
-			}
-
             let shortUuidLocal = shortUuid;
 
             if (this.isGenericPath(req.path)) {
@@ -96,6 +85,16 @@ export class RootService {
             if (userAgent && this.isBrowser(userAgent)) {
                 return this.returnWebpage(clientIp, req, res, shortUuidLocal);
             }
+			
+			const ua = userAgent ?? '';
+			const isAllowedAgent = allowedAgents.some(agent =>
+				ua.includes(agent)
+			);
+
+			if (!isAllowedAgent && !this.isBrowser(ua)) {
+				res.status(404).send();
+				return;
+			}
 
             let subscriptionDataResponse: {
                 response: unknown;
