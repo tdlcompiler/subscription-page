@@ -21,6 +21,27 @@ interface IProps {
     isMobile: boolean
 }
 
+function deriveDisplayName(
+    description: string | null | undefined,
+    username: string
+): string {
+    if (!description) return username;
+
+    const trimmed = description.trim();
+    if (!trimmed) return username;
+
+    if (trimmed.includes('\n')) {
+        return trimmed.split(/\r?\n/)[0].trim();
+    }
+
+    const words = trimmed.split(/\s+/);
+    if (words.length >= 2) {
+        return words[0];
+    }
+
+    return trimmed;
+}
+
 export const SubscriptionInfoExpandedWidget = ({ isMobile }: IProps) => {
     const { t, currentLang, baseTranslations } = useTranslation()
     const subscription = useSubscription()
@@ -58,6 +79,7 @@ export const SubscriptionInfoExpandedWidget = ({ isMobile }: IProps) => {
 
     const statusInfo = getStatusAndIcon()
     const gradientColor = getColorGradientSolid(statusInfo.color)
+	const displayName = deriveDisplayName(subscription.userObject?.description, user.username);
 
     return (
         <Card p={{ base: 'sm', xs: 'md', sm: 'lg', md: 'xl' }} radius="lg">
@@ -94,7 +116,7 @@ export const SubscriptionInfoExpandedWidget = ({ isMobile }: IProps) => {
                                     whiteSpace: 'nowrap'
                                 }}
                             >
-                                {user.username}
+                                {displayName}
                             </Title>
                             <Text
                                 c={user.daysLeft === 0 ? 'red' : 'dimmed'}
@@ -116,7 +138,7 @@ export const SubscriptionInfoExpandedWidget = ({ isMobile }: IProps) => {
                         color="blue"
                         icon={<IconUserScan size={16} />}
                         title={t(baseTranslations.name)}
-                        value={user.username}
+                        value={displayName}
                     />
 
                     <InfoBlockShared
