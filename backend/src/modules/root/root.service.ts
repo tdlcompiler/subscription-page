@@ -56,7 +56,7 @@ export class RootService {
         try {
             const userAgent = req.headers['user-agent'];
 
-			const allowedAgents = ['v2raytun', 'Happ', 'koala-clash', 'INCY'];
+			const allowedAgents = ['v2raytun', 'Happ', 'koala-clash', 'TDLCloud'];
 
             let shortUuidLocal = shortUuid;
 
