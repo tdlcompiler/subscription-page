@@ -65,6 +65,8 @@ async function bootstrap(): Promise<void> {
         }),
     });
 
+	app.set('trust proxy', '83.147.255.136/32');
+	
     app.disable('x-powered-by');
 
     app.use(cookieParser());
