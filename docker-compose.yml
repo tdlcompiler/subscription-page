@@ -1,9 +1,18 @@
 services:
   remnawave-subscription-page:
+    hostname: remnawave-caddy
     build:
       context: .
       dockerfile: Dockerfile
+    networks:
+      - remnawave-network
     env_file:
       - .env
     ports:
       - '127.0.0.1:3010:3010'
+
+networks:
+    remnawave-network:
+        name: remnawave-network
+        driver: bridge
+        external: true
