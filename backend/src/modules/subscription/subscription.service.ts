@@ -22,7 +22,7 @@ export class SubscriptionService {
     ): Promise<void> {
         try {
 			const userAgent = req.headers['user-agent'];
-			const allowedAgents = ['v2raytun', 'Happ', 'koala-clash', 'TDLCloud'];
+			const allowedAgents = ['v2raytun', 'Happ', 'koala-clash', 'TDLCloud', 'INCY'];
 			const ua = userAgent ?? '';
 			const isAllowedAgent = allowedAgents.some(agent =>
 				ua.includes(agent)
