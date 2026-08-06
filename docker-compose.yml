@@ -1,6 +1,6 @@
 services:
   remnawave-subscription-page:
-    hostname: remnawave-caddy
+    hostname: remnawave-subscription-page
     build:
       context: .
       dockerfile: Dockerfile
