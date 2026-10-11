@@ -21,7 +21,7 @@ export class SubscriptionService {
         clientType?: TRequestTemplateTypeKeys,
     ): Promise<void> {
         try {
-			const userAgent = req.headers['user-agent'];
+			/*const userAgent = req.headers['user-agent'];
 			const allowedAgents = ['v2raytun', 'Happ', 'koala-clash', 'TDLCloud', 'INCY'];
 			const ua = userAgent ?? '';
 			const isAllowedAgent = allowedAgents.some(agent =>
@@ -31,7 +31,7 @@ export class SubscriptionService {
 			if (!isAllowedAgent) {
 				res.status(404).send();
 				return;
-			}
+			}*/
 			
             const subscriptionDataResponse = await this.axiosService.getSubscription(
                 clientIp,
